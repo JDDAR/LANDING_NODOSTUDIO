@@ -9,7 +9,7 @@ import Reloj from '../../components/reloj/ui/Reloj';
 
 const Construccion: React.FC = () => {
 
-  const endDate = '2025-09-29T18:00:00';
+  const endDate = '2025-10-26T18:00:00';
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoLoaded, setIsVideoLoaded] = useState<boolean>(false);
@@ -29,8 +29,8 @@ const Construccion: React.FC = () => {
 
   useEffect(() => {
     const checkVideoSupport = () => {
-      const isDesktop = window.innerWidth > 768;
-    // 1. Definimos la interfaz aquí
+      const isDesktop = window.innerWidth > 992;
+      // 1. Definimos la interfaz aquí
       interface CustomNavigator extends Navigator {
          connection?: {
            effectiveType: string;
@@ -77,7 +77,7 @@ const Construccion: React.FC = () => {
   }, [shouldShowVideo]);
 
   const videoSources: VideoSourceProps[]= [ 
-    { src: '/videos/hero/nodostudio-hero.webm', type: 'video/web' },
+    { src: '/videos/hero/nodostudio-hero.webm', type: 'video/webm' },
     { src: '/videos/hero/nodostudio-hero.mp4', type: 'video/mp4'}
   ]
 
