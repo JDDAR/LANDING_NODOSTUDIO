@@ -745,8 +745,7 @@ in the Software without restriction...
 **Nodo Studio** - Creando experiencias digitales excepcionales
 
 - 🌐 Website: [www.nodostudio.com](https://www.nodostudio.com)
-- 📧 Email: dev.nodostudio@gmail.com
-- 📷 Instagram: [@nodo.studio](https://www.instagram.com/nodostudio.d/)
+
 
 **Project Link:** [https://github.com/Nodo-Studio/LANDING_NODOSTUDIO](https://github.com/Nodo-Studio/LANDING_NODOSTUDIO)
 
