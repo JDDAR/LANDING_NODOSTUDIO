@@ -15,13 +15,23 @@ body {
     color 0.3s;
 }
 
-// Aplicar el tema al body
+%theme-light {
+  background-color: var(--color-bg-primary);
+  color: var(--color-secondary);
+}
+
+%theme-dark {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-dark);
+}
+
 body.light {
-  @extend :root;
+  @extend %theme-light;
 }
 
 body.dark {
-  @extend [data-theme='dark'];
+  @extend %theme-dark;
+
 }
 
 /* Estilos para navegadores WebKit (Chrome, Safari) */

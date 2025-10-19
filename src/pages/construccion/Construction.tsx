@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDocumentHead } from '../../hooks/useDocumentHead'
 import type { VideoSourceProps } from '../../types/video.types';
-import { TiSocialGithubCircular, TiSocialInstagramCircular, TiSocialLinkedinCircular } from "react-icons/ti";
+import { TiSocialFacebookCircular, TiSocialGithubCircular, TiSocialInstagramCircular, TiSocialLinkedinCircular } from "react-icons/ti";
 
 
 import './construccion.scss';
@@ -30,11 +30,24 @@ const Construccion: React.FC = () => {
   useEffect(() => {
     const checkVideoSupport = () => {
       const isDesktop = window.innerWidth > 768;
-      const hasGoodConnection = !('connection' in navigator) || 
-        (navigator as any).connection?.effectiveType === '4g' ||
-        (navigator as any).connection?.downlink > 1.5;
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // 1. Definimos la interfaz aquí
+      interface CustomNavigator extends Navigator {
+         connection?: {
+           effectiveType: string;
+           downlink: number;
+         };
+      }
+   
+
+      const connection = (navigator as CustomNavigator).connection;
+
+
+      // 2. Usamos la nueva interfaz en lugar de 'any'
+      const hasGoodConnection = !connection ||
+        connection.effectiveType === '4g' ||
+        connection.downlink > 1.5;    
       
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       setShouldShowVideo(isDesktop && hasGoodConnection && !prefersReducedMotion);
     };
 
@@ -126,9 +139,27 @@ const Construccion: React.FC = () => {
         </section>
         <div className='container-hero-content-social'>
           <ul>
-            <li><TiSocialGithubCircular /></li>
-            <li><TiSocialLinkedinCircular /></li>
-            <li><TiSocialInstagramCircular /></li>
+            <li>
+              <a href="https://github.com/Nodo-Studio">
+                <TiSocialGithubCircular />
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <TiSocialLinkedinCircular />
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/nodostudio.d/">
+                <TiSocialInstagramCircular />
+              </a>
+            </li>
+            <li> 
+              <a href="https://www.facebook.com/profile.php?id=100069583504426">
+                <TiSocialFacebookCircular />
+              </a>
+            </li>    
+
           </ul>
         </div>  
       </div>

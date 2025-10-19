@@ -6,6 +6,7 @@
   position: relative;
   overflow: hidden;
   color: var(--color-bg-primary);
+
   // Video de fondo
   &-video {
     position: absolute;
@@ -35,7 +36,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.05);
+      background: rgb(0 0 0 / 5%);
       z-index: 2;
     }
   }
@@ -54,7 +55,7 @@
     justify-content: space-between;
     background: var(--color-bg-primary) ;
     
-    @include glassBlur();
+    @include glassBlur;
 
     &-left {
       width: 100%;
@@ -69,11 +70,14 @@
       flex-direction: column;
       align-items: left;
       width: 100%;
+
       &-title{ 
         height: 100%;
+
         h2 {
           font-size: 3.5rem;
         }
+
         p {
           font-size: 1.5rem;
           font-weight: 100;
@@ -92,10 +96,12 @@
           flex-direction: column;
           gap: 1.5rem;
           border-bottom: 3px solid var(--color-line);
+
           span {
             font-size: 1.5rem;
             font-weight: 800;
           }
+
           p{
             font-weight: 200;
             font-size: 1rem;
@@ -121,9 +127,10 @@
     &-social{
       width: 100%;
       height: auto;
-      padding: 15px 15px 0px 15px;
+      padding: 15px 15px 0;
       display: flex;
       justify-content: star;
+
       ul{
         list-style-type: none;
         display: flex;
