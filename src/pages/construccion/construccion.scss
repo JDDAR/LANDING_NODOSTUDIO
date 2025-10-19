@@ -1,5 +1,6 @@
 @use '../../styles/abstracts/index' as *;
 
+
 .container-hero {
   width: 100%;
   height: 100vh;
@@ -20,6 +21,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+
+      
 
       // Ocultar video en dispositivos pequeños por rendimiento
       @include respond-below('lg') {
@@ -419,8 +422,10 @@
         
         li {
           font-size: 1.8rem;
+          
         }
       }
     }
   }
 }
+
