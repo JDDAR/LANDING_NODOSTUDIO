@@ -1,4 +1,5 @@
-@use '../../styles/abstracts/index' as * ;
+@use '../../styles/abstracts/index' as *;
+
 
 .container-hero {
   width: 100%;
@@ -7,20 +8,26 @@
   overflow: hidden;
   color: var(--color-bg-primary);
 
-  // Video de fondo
+  // ===== VIDEO DE FONDO =====
   &-video {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; 
+    z-index: 1;
 
-    // El video ocupa todo el espacio
     .hero-video {
       width: 100%;
       height: 100%;
       object-fit: cover;
+
+      
+
+      // Ocultar video en dispositivos pequeños por rendimiento
+      @include respond-below('lg') {
+        display: none;
+      }
     }
 
     .hero-image-bg {
@@ -28,6 +35,11 @@
       height: 100%;
       background-size: cover;
       background-position: center;
+
+      // Solo mostrar imagen cuando no hay video
+      @include respond-above('lg') {
+        display: none;
+      }
     }
 
     .video-overlay {
@@ -38,109 +50,382 @@
       height: 100%;
       background: rgb(0 0 0 / 5%);
       z-index: 2;
+
+      // Aumentar overlay en móviles para mejor legibilidad
+      @include respond-below('md') {
+        background: rgb(0 0 0 / 20%);
+      }
     }
   }
 
-
+  // ===== CONTENIDO PRINCIPAL =====
   &-content {
     position: absolute;
-    bottom: 0; 
+    bottom: 0;
     left: 0;
     width: 100%;
-    height: 55%;
-    z-index: 3;     
+    z-index: 3;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background: var(--color-bg-primary) ;
-    
+    background: var(--color-bg-primary);
+
     @include glassBlur;
 
+    // RESPONSIVE: Altura del contenido
+    // Móviles: ocupa más espacio para mejor legibilidad
+    height: 70%;
+    
+    @include respond-above('sm') {
+      height: 65%;
+    }
+    
+    @include respond-above('md') {
+      height: 60%;
+    }
+    
+    @include respond-above('lg') {
+      height: 55%; // Tu valor original para desktop
+    }
+
+    // ===== SECCIÓN IZQUIERDA =====
     &-left {
       width: 100%;
       height: 100%;
       display: flex;
       justify-content: space-between;
       padding: 15px;
+
+      // RESPONSIVE: Cambiar a layout vertical en móviles
+      @include respond-below('lg') {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 15px;
+      }
+
+      @include respond-above('lg') {
+        padding: 15px;
+      }
+
+      @include respond-above('xl') {
+        padding: 25px;
+      }
     }
 
-    &-info{
+    // ===== INFORMACIÓN PRINCIPAL =====
+    &-info {
       display: flex;
       flex-direction: column;
       align-items: left;
       width: 100%;
 
-      &-title{ 
-        height: 100%;
+      // En desktop mantener tu layout original
+      @include respond-above('lg') {
+        width: 70%; // Ajustar para hacer espacio al reloj
+      }
+
+      // ===== TÍTULO Y DESCRIPCIÓN =====
+      &-title {
+        height: auto; // Cambiar de 100% para mejor responsive
+        margin-bottom: 20px;
+
+        @include respond-above('lg') {
+          height: 100%;
+          margin-bottom: 0;
+        }
 
         h2 {
-          font-size: 3.5rem;
+          font-size: 2rem; // Reducir para móviles
+          line-height: 1.1;
+          margin-bottom: 15px;
+
+          @include respond-above('sm') {
+            font-size: 2.5rem;
+          }
+
+          @include respond-above('md') {
+            font-size: 3rem;
+          }
+
+          @include respond-above('lg') {
+            font-size: 3.5rem; // Tu valor original
+          }
+
+          @include respond-above('xl') {
+            font-size: 4rem;
+          }
         }
 
         p {
-          font-size: 1.5rem;
+          font-size: 1rem; // Reducir para móviles
           font-weight: 100;
           width: 100%;
+          line-height: 1.4;
+
+          @include respond-above('sm') {
+            font-size: 1.2rem;
+          }
+
+          @include respond-above('md') {
+            font-size: 1.3rem;
+          }
+
+          @include respond-above('lg') {
+            font-size: 1.5rem; // Tu valor original
+          }
+
+          @include respond-above('xl') {
+            font-size: 1.6rem;
+          }
         }
       }
 
+      // ===== TARJETAS DE SERVICIOS =====
       &-cards {
-        height: 100%;
+        height: auto; // Cambiar de 100% para responsive
         display: flex;
-        gap: 35px;
+        gap: 20px; // Reducir gap para móviles
 
-        .card {
-          width: 30%; 
-          display: flex;
+        // RESPONSIVE: Layout vertical en móviles y tablets
+        @include respond-below('lg') {
           flex-direction: column;
-          gap: 1.5rem;
-          border-bottom: 3px solid var(--color-line);
-
-          span {
-            font-size: 1.5rem;
-            font-weight: 800;
-          }
-
-          p{
-            font-weight: 200;
-            font-size: 1rem;
-          }
+          gap: 25px;
         }
 
+        @include respond-above('lg') {
+          gap: 35px; // Tu valor original
+          height: 100%;
+        }
+
+        .card {
+          width: 100%; // Full width en móviles
+          display: flex;
+          flex-direction: column;
+          gap: 1rem; // Reducir gap para móviles
+          border-bottom: 3px solid var(--color-line);
+          padding-bottom: 15px; // Agregar padding para separar del border
+
+          @include respond-above('lg') {
+            width: 30%; // Tu valor original
+            gap: 1.5rem;
+          }
+
+          span {
+            font-size: 1.2rem; // Reducir para móviles
+            font-weight: 800;
+
+            @include respond-above('sm') {
+              font-size: 1.3rem;
+            }
+
+            @include respond-above('lg') {
+              font-size: 1.5rem; // Tu valor original
+            }
+
+            @include respond-above('xl') {
+              font-size: 1.6rem;
+            }
+          }
+
+          p {
+            font-weight: 200;
+            font-size: 0.9rem; // Reducir para móviles
+            line-height: 1.5;
+
+            @include respond-above('sm') {
+              font-size: 0.95rem;
+            }
+
+            @include respond-above('lg') {
+              font-size: 1rem; // Tu valor original
+            }
+
+            @include respond-above('xl') {
+              font-size: 1.1rem;
+            }
+          }
+        }
       }
     }
 
-    &-reloj{
-      width: 30%;
+    // ===== SECCIÓN DEL RELOJ =====
+    &-reloj {
+      width: 100%; // Full width en móviles
       display: flex;
       flex-direction: column;
-      align-items: end;
+      align-items: center; // Centrar en móviles
       gap: 15px;
+
+      // RESPONSIVE: Layout específico para desktop
+      @include respond-above('lg') {
+        width: 30%; // Tu valor original
+        align-items: end; // Tu estilo original
+      }
 
       p {
         font-size: 0.8rem;
-      }
+        text-align: center; // Centrar en móviles
 
+        @include respond-above('lg') {
+          text-align: right; // Alinear a la derecha en desktop
+        }
+
+        @include respond-above('xl') {
+          font-size: 0.9rem;
+        }
+      }
     }
 
-    &-social{
+    // ===== REDES SOCIALES =====
+    &-social {
       width: 100%;
       height: auto;
       padding: 15px 15px 0;
       display: flex;
-      justify-content: star;
+      justify-content: center; // Centrar en móviles
 
-      ul{
+      @include respond-above('lg') {
+        justify-content: flex-start; // Tu estilo original
+        padding: 15px 15px 0;
+      }
+
+      @include respond-above('xl') {
+        padding: 25px 25px 0;
+      }
+
+      ul {
         list-style-type: none;
         display: flex;
-        gap: 25px;
+        gap: 20px; // Reducir gap para móviles
+        padding: 0;
+        margin: 0;
+
+        @include respond-above('lg') {
+          gap: 25px; // Tu valor original
+        }
+
+        @include respond-above('xl') {
+          gap: 30px;
+        }
 
         li {
-          font-size: 2.5rem;
+          font-size: 2rem; // Reducir para móviles
+
+          @include respond-above('sm') {
+            font-size: 2.2rem;
+          }
+
+          @include respond-above('lg') {
+            font-size: 2.5rem; // Tu valor original
+          }
+
+          @include respond-above('xl') {
+            font-size: 2.8rem;
+          }
+
+          a {
+            color: var(--color-bg-primary);
+            display: block;
+            transition: transform 0.2s ease;
+
+            &:hover {
+              transform: scale(1.1);
+
+              @include respond-below('md') {
+                transform: scale(1.05); // Menor efecto en móviles
+              }
+            }
+          }
         }
       }
     }
-
   }
 }
+
+// ===== MEDIA QUERIES ESPECIALES =====
+
+// Móviles en landscape - reducir altura del contenido
+@media (height <= 500px) and (orientation: landscape) {
+  .container-hero {
+    &-content {
+      height: 80% !important;
+      
+      &-left {
+        padding: 10px;
+        gap: 15px;
+      }
+      
+      &-info {
+        &-title {
+          h2 {
+            font-size: 1.5rem;
+          }
+          
+          p {
+            font-size: 0.9rem;
+          }
+        }
+        
+        &-cards {
+          gap: 15px;
+          
+          .card {
+            gap: 0.8rem;
+            
+            span {
+              font-size: 1rem;
+            }
+            
+            p {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+      
+      &-social ul li {
+        font-size: 1.8rem;
+      }
+    }
+  }
+}
+
+// Pantallas muy pequeñas (iPhone SE, etc.)
+@media (width <= 360px) {
+  .container-hero {
+    &-content {
+      &-info {
+        &-title {
+          h2 {
+            font-size: 1.8rem;
+          }
+          
+          p {
+            font-size: 0.9rem;
+          }
+        }
+        
+        &-cards .card {
+          span {
+            font-size: 1.1rem;
+          }
+          
+          p {
+            font-size: 0.85rem;
+          }
+        }
+      }
+      
+      &-social ul {
+        gap: 15px;
+        
+        li {
+          font-size: 1.8rem;
+          
+        }
+      }
+    }
+  }
+}
+

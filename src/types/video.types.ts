@@ -1,6 +1,6 @@
 export interface VideoSourceProps {
   src: string;
-  type: 'video/mp4' | 'video/web' | 'video/ogg'; 
+  type: 'video/mp4' | 'video/webm' | 'video/ogg'; 
 }
 
 export interface HeroVideoProps {

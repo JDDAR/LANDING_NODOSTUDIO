@@ -8,8 +8,9 @@ body {
   height: 100%;
   width: 100%;
   font-family: $font-family;
-  background-color: var(--color-bg-primary);
+  background-color: var(--color-bg-primary); 
   color: var(--color-secondary);
+  
   transition:
     background-color 0.3s,
     color 0.3s;
@@ -64,3 +65,5 @@ html {
   scrollbar-width: thin;
   scrollbar-color: var(--color-primary) var(--color-bg-primary);
 }
+
+

@@ -1,0 +1,65 @@
+@use "sass:map";
+
+// Definición de breakpoints estándar de la industria
+$breakpoints: (
+'xs': 320px,   // Móviles pequeños (iPhone SE, Galaxy S)
+'sm': 576px,   // Móviles grandes (iPhone 12, Pixel)
+'md': 768px,   // Tablets verticales (iPad)
+'lg': 992px,   // Tablets horizontales y laptops pequeñas
+'xl': 1200px,  // Desktops y laptops grandes
+'xxl': 1400px  // Monitores grandes y 4K
+);
+
+// Mixin para media queries "desde X hacia arriba"
+@mixin respond-above($breakpoint) {
+$size: map.get($breakpoints, $breakpoint);
+
+@if $size {
+  @media (width >= $size) {
+    @content;
+  }
+} @else {
+  @error "Breakpoint '#{$breakpoint}' no existe. Usa: xs, sm, md, lg, xl, xxl";
+}
+}
+
+// Mixin para media queries "desde X hacia abajo"
+@mixin respond-below($breakpoint) {
+$size: map.get($breakpoints, $breakpoint);
+
+@if $size {
+  @media (width <= ($size - 1px)) {
+    @content;
+  }
+} @else {
+  @error "Breakpoint '#{$breakpoint}' no existe. Usa: xs, sm, md, lg, xl, xxl";
+}
+}
+
+// Mixin para rangos específicos "entre X y Y"
+@mixin respond-between($min-bp, $max-bp) {
+$min-size: map.get($breakpoints, $min-bp);
+$max-size: map.get($breakpoints, $max-bp);
+
+@if $min-size and $max-size {
+  @media (width >= ($min-size)) and (width <= ($max-size - 1px)) {
+    @content;
+  }
+} @else {
+  @error "Uno de los breakpoints no existe. Usa: xs, sm, md, lg, xl, xxl";
+}
+}
+
+// Mixin para orientación landscape en móviles
+@mixin mobile-landscape {
+@media (height <= 500px) and (orientation: landscape) {
+  @content;
+}
+}
+
+// Mixin para pantallas de alta densidad (Retina)
+@mixin high-dpi {
+@media (resolution >= 192dpi) {
+  @content;
+}
+}
